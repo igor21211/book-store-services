@@ -11,7 +11,11 @@ spring:
     database: postgresql
     open-in-view: false
     generate-ddl: true
-
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: tobi
+    password: 0191
 
 server:
     port: 9191

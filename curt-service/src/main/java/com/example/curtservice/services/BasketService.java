@@ -1,12 +1,13 @@
 package com.example.curtservice.services;
 
 import com.example.curtservice.model.Basket;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface BasketService {
-    Basket create(Basket basket);
+    Basket create(Basket basket) throws JsonProcessingException;
 
     Basket getBasketById(Long id);
 

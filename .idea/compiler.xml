@@ -9,11 +9,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mail-notification-service" />
+        <module name="eureka" />
+        <module name="catalog-service" />
         <module name="profile-service" />
         <module name="curt-service" />
         <module name="order-service" />
-        <module name="eureka" />
-        <module name="catalog-service" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +30,8 @@
       <module name="catalog-service (1)" options="-parameters" />
       <module name="curt-service" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="mail-notification-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
       <module name="profile-service" options="-parameters" />
       <module name="user-profile-service" options="-parameters" />

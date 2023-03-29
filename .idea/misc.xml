@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/user-profile-service/pom.xml" />
         <option value="$PROJECT_DIR$/user-profile-servicer/pom.xml" />
         <option value="$PROJECT_DIR$/curt-service/pom.xml" />
+        <option value="$PROJECT_DIR$/mail-notification-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

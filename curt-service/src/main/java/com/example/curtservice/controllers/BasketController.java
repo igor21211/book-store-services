@@ -2,6 +2,7 @@ package com.example.curtservice.controllers;
 
 import com.example.curtservice.model.Basket;
 import com.example.curtservice.services.BasketService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class BasketController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Basket createBasket(@RequestBody Basket basket){
+    public Basket createBasket(@RequestBody Basket basket) throws JsonProcessingException {
         return service.create(basket);
     }
 

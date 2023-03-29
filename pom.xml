@@ -21,6 +21,8 @@
     <module>profile-service</module>
     <module>curt-service</module>
     <module>order-service</module>
+    <module>mail-notification-service</module>
+    <module>gateway</module>
   </modules>
 
   <properties>

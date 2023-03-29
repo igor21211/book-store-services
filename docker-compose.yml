@@ -1,15 +1,12 @@
-version: "3.1"
-
+version: "3.2"
 services:
-  db:
-    image: postgres
+  rabbitmq:
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
     restart: always
-    ports:
-      - 5532:5532
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "0191"
-      POSTGRES_DB: "book"
-      PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - /infrastructures/pgdata:/var/lib/postgresql/data \
+      - RABBITMQ_DEFAULT_USER=tobi
+      - RABBITMQ_DEFAULT_PASS=0191
+    ports:
+      - 5672:5672
+      - 15672:15672

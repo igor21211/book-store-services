@@ -1,7 +1,10 @@
 package com.example.curtservice.services;
 
 import com.example.curtservice.model.Basket;
+import com.example.curtservice.rabbit.RabbitSender;
 import com.example.curtservice.repository.BasketRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +22,11 @@ public class BasketServiceImpl implements BasketService {
     private final String URL_PROFILE = "lb://PROFILE-SERVICE/user/{id}";
      private RestTemplate restTemplate;
      private BasketRepository repository;
+     private RabbitSender rabbitSender;
 
 
     @Override
-    public Basket create(Basket basket) {
+    public Basket create(Basket basket) throws JsonProcessingException {
         if(!basket.getUserId().equals(checkProductAndUser(basket.getUserId(),URL_PROFILE))){
             throw new IllegalArgumentException("User id is not available");
         }
@@ -33,7 +37,10 @@ public class BasketServiceImpl implements BasketService {
             throw new IllegalArgumentException("User doesnt active");
         }
         Basket basketNew =  repository.save(basket);
-        return setPriceToTheBasket(basketNew.getProductId());
+        Basket basketEnd =  setPriceToTheBasket(basketNew.getId());
+        rabbitSender.sendCurtInfoEvent(new ObjectMapper().writeValueAsString(basketEnd));
+        return basketEnd;
+
     }
     public Basket setPriceToTheBasket(Long id){
         return repository.findById(id).map(

@@ -1,8 +1,11 @@
 package com.example.profileservice.controllers;
 
 import com.example.profileservice.model.User;
+import com.example.profileservice.rabbit.RabbitSender;
 import com.example.profileservice.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +16,15 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private UserService service;
+    private RabbitSender rabbitSender;
 
+    @SneakyThrows
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody User user){
         User userNew =  service.create(user);
         service.setDataCreatedByUser(userNew.getId());
+        rabbitSender.sendInfoUser(new ObjectMapper().writeValueAsString(userNew));
         return userNew;
     }
 
